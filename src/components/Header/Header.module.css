@@ -1,0 +1,51 @@
+header {
+    z-index: 99;
+    position: fixed;
+    width: 100%;
+    padding: 56px 0;
+    background-color: white;
+    font-weight: 700;
+}
+
+.container {
+    width: 1440px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logoName {
+    font-size: 24px;
+    line-height: 30px;
+}
+.navigation {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    text-transform: uppercase;
+}
+.navItem {
+    font-size: 12px;
+    line-height: 12px;
+    opacity: 0.5;
+}
+.navItem:hover {
+    opacity: 1;
+    font-weight: 900;
+    transform: scale(1.05);
+    transition: 0.7s;
+}
+.navItem:not(:last-child) {
+    margin-right: 40px;
+}
+.management {
+    display: flex;
+    align-items: center;
+}
+.manageItem:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+.manageItem:not(:last-child) {
+    margin-right: 40px;
+}

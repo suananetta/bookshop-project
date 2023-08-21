@@ -1,0 +1,48 @@
+
+.sliderBlock {
+    margin-bottom: 134px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.banner1 {
+    width: 1120px;
+    height: 702px;
+    background-image: url(../../_assets/images/banner1_bf.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.banner2 {
+    width: 1120px;
+    height: 702px;
+    background-image: url(../../_assets/images/banner2_top10.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.banner3 {
+    width: 1120px;
+    height: 702px;
+    background-image: url(../../_assets/images/banner3_co.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.dots {
+    width: 5%;
+    padding-top: 17px;
+    display: flex;
+    justify-content: space-between;
+}
+.dot {
+    border: none;
+    padding: 7px;
+    border-radius: 50%;
+    background-color: #9E98DC;
+    opacity: 0.5;
+}
+.dot:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.3s;
+    opacity: 1;
+}
