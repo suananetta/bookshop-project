@@ -1,11 +1,19 @@
 import uniqid from 'uniqid';
 
-function List({ulClass, liClass, arr, onClick}) {
+import styles from '../Main.module.css'
+
+function List({ulClass, liName, active, arr, onClick}) {
     return (
         <ul className={ulClass}>
             {arr.map(category => {
                 return (
-                    <li key={uniqid()} className={liClass} onClick={onClick}>{category}</li>
+                    <li 
+                        key={uniqid()} 
+                        className={liName === category && active? styles.menuItemActive : styles.menuItem} 
+                        onClick={onClick}
+                    >
+                        {category}
+                    </li>
                 )
             })}
         </ul>

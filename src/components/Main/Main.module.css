@@ -1,7 +1,10 @@
+main {
+    padding: 150px 0;
+}
+
 .container {
     width: 1440px;
 }
-
 .subjectsList {
     position: absolute;
     width: 30%;
@@ -10,9 +13,6 @@
     flex-direction: column;
     align-items: center;
     background-color: #EFEEF6;
-}
-.mock {
-    height: 150px;
 }
 .content {
     display: flex;
@@ -23,13 +23,21 @@
     margin-left: 406px;
     width: 100%;
     display: flex;
-    /* flex-direction: column; */
+    justify-content: center;
     flex-wrap: wrap;
 }
 .menuItem {
     font-size: 12px;
     font-weight: 500;
     line-height: 15px;
+}
+.menuItemActive {
+    margin-bottom: 23px;
+    list-style: outside;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    transition: 0.3s;
 }
 .menuItem:not(:last-child) {
     margin-bottom: 23px;
@@ -47,4 +55,86 @@ li.menuItem:hover {
     font-weight: 700;
     line-height: 20px;
     transition: 0.3s;
+}
+
+.bookBlock {
+    width: 424px;
+    margin: 0 76px 96px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Open Sans', Georgia, 'Times New Roman', Times, sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    color: #5C6A79;
+}
+.bookInfo {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.bookImg{
+    width: 50%;
+    height: 300px;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+}
+.bookTitle {
+    font-family: 'Montserrat', Georgia, 'Times New Roman', Times, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1C2A39;
+}
+.bookDescription {
+    padding: 16px 0;
+}
+.bookPrice {
+    font-family: 'Montserrat', Georgia, 'Times New Roman', Times, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 16px;
+    color: #1C2A39;
+}
+
+.content button {
+    margin-top: 16px;
+    width: 176px;
+    padding: 18px 0;
+    background-color: rgb(255,255,255,0);
+    text-transform: uppercase;
+    font-family: 'Montserrat', Georgia, 'Times New Roman', Times, sans-serif;
+    font-weight: 700;
+    font-size: 8px;
+    line-height: 10px;
+}
+.content button:hover {
+    cursor: pointer;
+    color: #fff;
+    transform: scale(1.03);
+    transition: 0.5s;
+}
+.bookBtn {
+    color: #4C3DB2;
+    border: 1px solid #4C3DB2;
+}
+.bookBtn:hover {
+    background-color: #4C3DB2;
+}
+.bookBtn:disabled {
+    display: none;
+}
+.btnClicked {
+    color: #5C6A79;
+    border: 1px solid #5C6A79;
+}
+.btnClicked:hover {
+    background-color: #5C6A79;
 }

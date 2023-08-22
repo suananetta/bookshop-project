@@ -15,7 +15,7 @@ export const getBooks = createAsyncThunk(
     'category/categoryRequest',
     async (state) => {
         const response = await reqBookCategory(state.currentCategory, state.startIndex, state.maxResult);
-        console.log(response.data.items);
+        // console.log(response.data.items);
         return response.data.items;
     }
 )
@@ -37,12 +37,16 @@ export const manageSlice = createSlice({
             .addCase(getBooks.fulfilled, (state, action) => {
                 state.loading = false;
                 state.booksList = action.payload;
+                // sessionStorage.setItem('initState', JSON.stringify(action.payload))
+                console.log(state.booksList);
             })
             .addCase(getBooks.rejected, (state, action) => {
                 state.loading = false;
             })
     }
 })
+
+
 
 export const { selectCategory, selectBook } = manageSlice.actions;
 export default manageSlice.reducer;

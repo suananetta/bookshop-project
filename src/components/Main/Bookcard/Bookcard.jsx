@@ -1,10 +1,11 @@
-import styles from './Bookcard.module.css'
+import styles from '../Main.module.css';
 
 import Button from '../../_shared/Button/Button';
 import { useState } from 'react';
 
 
 function Bookcard({bookInfo}) {
+    const { format } = require('number-currency-format-2');
 
     let volumeInfo = bookInfo.volumeInfo;
     let saleInfo = bookInfo.saleInfo;
@@ -53,14 +54,16 @@ function Bookcard({bookInfo}) {
                         : 
                         saleInfo.saleability === "FREE"? "FREE"
                         :
-                        saleInfo.retailPrice.amount + ' ' + saleInfo.retailPrice.currencyCode
+                        format(saleInfo.retailPrice.amount, {
+                            currency: `${saleInfo.retailPrice.currencyCode}`
+                        })
                     }
                 </span>
 
                 <Button
                     btnClass={clickedBtn? styles.btnClicked : styles.bookBtn}
                     btnName={clickedBtn? 'in the cart' : 'BUY NOW'}
-                    disabled={false}
+                    disabled={saleInfo.saleability === "NOT_FOR_SALE"? true : false}
                     onClick={handleClick}
                 />
             </div>
