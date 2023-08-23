@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/bookshop-project/static/css/main.2247af8b.css",
+    "main.js": "/bookshop-project/static/js/main.00ef6f72.js",
+    "static/media/banner2_top10.png": "/bookshop-project/static/media/banner2_top10.aad3b703e7e6f8de2b59.png",
+    "static/media/banner3_co.png": "/bookshop-project/static/media/banner3_co.b62ead6875579370ce04.png",
+    "static/media/banner1_bf.png": "/bookshop-project/static/media/banner1_bf.de867e41dc4933c7e397.png",
+    "index.html": "/bookshop-project/index.html",
+    "main.2247af8b.css.map": "/bookshop-project/static/css/main.2247af8b.css.map",
+    "main.00ef6f72.js.map": "/bookshop-project/static/js/main.00ef6f72.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2247af8b.css",
+    "static/js/main.00ef6f72.js"
+  ]
+}
