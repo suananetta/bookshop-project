@@ -4,6 +4,7 @@ import { reqBookCategory } from '../_axios/requests';
 
 const initialState = {
     loading: false,
+    activeModal: false,
     chosenBooks: [],
     booksList: [],
     initialCategory: 'Architecture',
@@ -24,11 +25,17 @@ export const manageSlice = createSlice({
     name: 'manageBooks',
     initialState,
     reducers: {
-        // selectCategory(state, action) {
-        //     state.chosenCategory = action.payload;
-        // },
         selectBook(state, action) {
-            state.chosenBooks = [...action.payload];
+            state.chosenBooks = [...state.chosenBooks, action.payload];
+            localStorage.setItem('chosenBooks', JSON.stringify(state.chosenBooks));
+            console.log(state.chosenBooks);
+        },
+        removeBook(state, action) {
+            state.chosenBooks = [...state.chosenBooks.filter(book => book.id !== action.payload.id)];
+        },
+        activeModal(state, action) {
+            state.activeModal = !state.activeModal;
+            console.log(state.activeModal);
         }
     },
     extraReducers: (builder) => {
@@ -37,8 +44,7 @@ export const manageSlice = createSlice({
             .addCase(getBooks.fulfilled, (state, action) => {
                 state.loading = false;
                 state.booksList = action.payload;
-                // sessionStorage.setItem('initState', JSON.stringify(action.payload))
-                console.log(state.booksList);
+                // console.log(state.booksList);
             })
             .addCase(getBooks.rejected, (state, action) => {
                 state.loading = false;
@@ -48,5 +54,5 @@ export const manageSlice = createSlice({
 
 
 
-export const { selectCategory, selectBook } = manageSlice.actions;
+export const { selectBook, removeBook, activeModal } = manageSlice.actions;
 export default manageSlice.reducer;

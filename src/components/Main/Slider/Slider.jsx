@@ -22,9 +22,9 @@ function Slider() {
             name: 'banner3 - check out',
             visability: false
         }
-    ])
+    ]);
 
-    let [bannerStyle, setBannerStyle] = useState('banner1')
+    let [bannerStyle, setBannerStyle] = useState('banner1');
 
     let handleClick = (e) => {
         console.log(e.target.id);

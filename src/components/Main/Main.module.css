@@ -138,3 +138,11 @@ li.menuItem:hover {
 .btnClicked:hover {
     background-color: #5C6A79;
 }
+.booksList_btns {
+    display: flex;
+    align-items: center;
+}
+.btnUP  {
+    padding: 0px;
+    border: none;
+}

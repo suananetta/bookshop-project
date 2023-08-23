@@ -30,3 +30,31 @@ export const Icon_cart = () => {
         </svg>
     )
 }
+
+export const Icon_up = () => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="rgba(76, 61, 178, 1)" >
+            <path d="M11 8.414V18h2V8.414l4.293 4.293 1.414-1.414L12 4.586l-6.707 6.707 1.414 1.414z"></path>
+        </svg>
+    )
+}
+
+export const Icon_book = () => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="rgba(76, 61, 178, 1)">
+            <path d="M6 22h15v-2H6.012C5.55 19.988 5 19.805 5 19s.55-.988 1.012-1H21V4c0-1.103-.897-2-2-2H6c-1.206 0-3 .799-3 3v14c0 2.201 1.794 3 3 3zM5 8V5c0-.805.55-.988 1-1h13v12H5V8z"></path>
+            <path d="M8 6h9v2H8z"></path>
+        </svg>
+    )
+}
+
+export const Icon_close = () => {
+    return (
+        <svg width="16" height="17" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="1.35355" y1="0.646447" x2="24.3536" y2="23.6464" stroke="rgba(76, 61, 178, 1)" strokeWidth="3"/>
+            <line y1="-0.5" x2="32.5269" y2="-0.5" transform="matrix(-0.707107 0.707107 0.707107 0.707107 24 1)" stroke="rgba(76, 61, 178, 1)" strokeWidth="3"/>
+        </svg>
+    )
+}
+
+

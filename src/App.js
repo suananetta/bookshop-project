@@ -10,15 +10,12 @@ function App() {
   const dispatch = useDispatch();
 
   const searchInfo = useSelector((state) => state.manageBooks);
-  let [initBooks, setInitBooks] = useState([]);
 
   let reqInfo = {
     currentCategory: searchInfo.initialCategory,
     startIndex: searchInfo.startIndex,
     maxResult: searchInfo.maxResult
   }
-
-  // let initialState = dispatch(getBooks(reqInfo));
 
   useEffect(() => {
     dispatch(getBooks(reqInfo));

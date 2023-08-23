@@ -1,25 +1,33 @@
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import uniqid from 'uniqid';
+import { Tooltip } from 'react-tooltip';
 
-import styles from './Main.module.css'
+import styles from './Main.module.css';
 
 import Slider from './Slider/Slider';
 import List from './List/List';
 import Bookcard from './Bookcard/Bookcard';
 
-import Button from "../_shared/Button/Button";
+import Button from '../_shared/Button/Button';
 import Loader from '../_shared/Loader/Loader';
-import { useEffect, useState } from 'react';
+import Modal from '../_shared/Modal/Modal';
+import { Icon_up } from '../_assets/images/icons'
 import { getBooks } from '../_redux/manageSlice';
 
 function Main({reqInfo}) {  
     const dispatch = useDispatch();
 
     const searchInfo = useSelector((state) => state.manageBooks);
-
+    console.log(searchInfo);
     let [books, setBooks] = useState([]);
 
-    useEffect(() => {setBooks(searchInfo.booksList)}, [searchInfo.booksList])
+    useEffect(() => {setBooks(searchInfo.booksList)}, [searchInfo.booksList]);
+    useEffect(() => {
+        if(books.length > 6) {
+            document.getElementById('loadBtn').scrollIntoView({ behavior: 'smooth' })
+        }
+    }, [books])
 
     let categoryList = [
         'Architecture', 
@@ -43,20 +51,12 @@ function Main({reqInfo}) {
     let [category, setCategory] = useState('Architecture');
     let [clicked, setClicked] = useState(false);
 
-    // let reqInfo = {
-    //     currentCategory: category,
-    //     startIndex: searchInfo.startIndex,
-    //     maxResult: searchInfo.maxResult
-    // }
-
     let categoryClick = (e) => {
         setCategory(e.target.textContent);
-
+        setClicked(true);
         reqInfo.currentCategory = e.target.textContent;
 
         dispatch(getBooks(reqInfo)).then((action) => setBooks(action.payload));
-
-        setClicked(true);
     }
 
     let loadMoreClick = () => {
@@ -64,19 +64,21 @@ function Main({reqInfo}) {
         reqInfo.startIndex = books.length;
         
         dispatch(getBooks(reqInfo)).then((action) => setBooks([...books, ...action.payload]));
-        console.log(books);
+        // console.log(books);
     }
 
-    // useEffect(()=>{
-    //     document.getElementById('loadBtn').scrollIntoView();
-    // }, [books])
-
+    let upBtnCkick = () => {
+        document.getElementById('banner1').scrollIntoView({ behavior: 'smooth' })
+    }
     
     return (
         <main>
             <div>
+                {
+                    searchInfo.activeModal? <Modal/> : ''
+                }
+
                 <Slider/>
-                
 
                 <div className={styles.content}>
                     <div className={styles.subjectsList}>
@@ -85,7 +87,7 @@ function Main({reqInfo}) {
                             liName={category}
                             active={clicked}
                             arr={categoryList}
-                            onClick={async (e) => {
+                            onClick={(e) => {
                                 categoryClick(e);
                             }}
                         />
@@ -106,15 +108,30 @@ function Main({reqInfo}) {
                         }
                         {
                             books.length == 0 || searchInfo.loading? 
-                            ''
-                            :
-                            <Button
-                                btnClass={styles.bookBtn}
-                                id='loadBtn'
-                                btnName='LOAD MORE'
-                                disabled={false}
-                                onClick={() => {loadMoreClick(reqInfo.maxResult)}}
-                            />
+                                ''
+                                :
+                                <div className={styles.booksList_btns}>
+                                <Button
+                                    btnClass={styles.bookBtn}
+                                    btnID='loadBtn'
+                                    btnName='LOAD MORE'
+                                    disabled={false}
+                                    onClick={() => {
+                                        loadMoreClick(reqInfo.maxResult);
+                                    }}
+                                />
+                                <Button
+                                    btnClass={styles.btnUP}
+                                    btnName={<Icon_up/>}
+                                    disabled={false}
+                                    tooltipID='up-tooltip' 
+                                    tooltip='Back to top'
+                                    onClick={() => {
+                                        upBtnCkick();
+                                    }}
+                                />
+                                <Tooltip id='up-tooltip'/>
+                                </div>                          
                         }
                         
                     </div>

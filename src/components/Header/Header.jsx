@@ -1,8 +1,15 @@
-import styles from './Header.module.css'
+import { useDispatch, useSelector } from 'react-redux';
 
-import {Icon_profile, Icon_search, Icon_cart} from '../_assets/images/icons'
+import styles from './Header.module.css';
+
+import Button from '../_shared/Button/Button';
+import {Icon_profile, Icon_search, Icon_cart} from '../_assets/images/icons';
+import { activeModal } from '../_redux/manageSlice';
+
 
 function Header() {
+    const dispatch = useDispatch();
+
     return (
         <header>
             <div className={styles.container}>
@@ -16,9 +23,30 @@ function Header() {
                     </ul>
                 </nav>
                 <div className={styles.management}>
-                    <div className={styles.manageItem}><Icon_profile/></div>
-                    <div className={styles.manageItem}><Icon_search/></div>
-                    <div className={styles.manageItem}><Icon_cart/></div>
+                        <Button
+                            btnClass={styles.manageItem}
+                            btnName={<Icon_profile/>}
+                            disabled={false}
+                            onClick={(e) => {
+                                console.log(e);
+                            }}
+                        />
+                        <Button
+                            btnClass={styles.manageItem}
+                            btnName={<Icon_search/>}
+                            disabled={false}
+                            onClick={(e) => {
+                                console.log(e);
+                            }}
+                        />
+                        <Button
+                            btnClass={styles.manageItem}
+                            btnName={<Icon_cart/>}
+                            disabled={false}
+                            onClick={() => {
+                                dispatch(activeModal());
+                            }}
+                        />
                 </div>          
             </div>
         </header>

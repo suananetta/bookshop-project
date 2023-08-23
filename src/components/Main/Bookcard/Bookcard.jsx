@@ -1,20 +1,36 @@
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import styles from '../Main.module.css';
 
 import Button from '../../_shared/Button/Button';
-import { useState } from 'react';
-
+import { selectBook, removeBook } from '../../_redux/manageSlice'
 
 function Bookcard({bookInfo}) {
     const { format } = require('number-currency-format-2');
+
+    const dispatch = useDispatch();
+
+    const chosenBooks = useSelector((state) => state.manageBooks.chosenBooks);
 
     let volumeInfo = bookInfo.volumeInfo;
     let saleInfo = bookInfo.saleInfo;
 
     let [clickedBtn, setClickedBtn] = useState(false)
 
-    let handleClick = () => {
-        setClickedBtn(!clickedBtn);
+    let handleClick = (e) => {
+        if(e.target.innerText === 'BUY NOW') {
+            dispatch(selectBook(bookInfo));
+        } else {
+            dispatch(removeBook(bookInfo));
+        }   
     }
+
+    useEffect(() => {
+        chosenBooks.map(book => {
+            if(book === bookInfo) setClickedBtn(!clickedBtn);
+        })
+    }, [chosenBooks]);
 
     return (
         <div className={styles.bookBlock}>
@@ -29,7 +45,6 @@ function Bookcard({bookInfo}) {
             </div>
 
             <div className={styles.bookInfo}>
-
                 <span className={styles.bookAuthor}>
                     {
                         !volumeInfo.authors? 'Author not found' 
@@ -64,7 +79,9 @@ function Bookcard({bookInfo}) {
                     btnClass={clickedBtn? styles.btnClicked : styles.bookBtn}
                     btnName={clickedBtn? 'in the cart' : 'BUY NOW'}
                     disabled={saleInfo.saleability === "NOT_FOR_SALE"? true : false}
-                    onClick={handleClick}
+                    onClick={(e) => {
+                        handleClick(e);
+                    }}
                 />
             </div>
         </div>
