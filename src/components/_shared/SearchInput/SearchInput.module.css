@@ -1,0 +1,38 @@
+.inputBlock {
+
+    display: flex;
+}
+.inputPlace {
+    width: 250px;
+}
+.inputBlock .inputPlace {
+    border-top-right: 0;
+    border-bottom-right: 0;
+    border-right: none;
+    position: relative;
+    z-index: 2;
+}
+.inputBlock .inputBtn {
+    position: relative;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left-width: 0;
+}
+.inputBtn {
+    display: inline-block;
+    cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+    user-select: none;
+    background-color: #EFEEF6;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    border-radius: 3px;
+    transition: background-color .15s ease-in-out;
+}
+.inputBtn:hover {
+    background-color: #4c3db280;
+}

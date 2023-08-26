@@ -1,6 +1,7 @@
 body {
   margin: 0 auto;
   padding: 0 166px;
+  overflow-x: hidden;
   font-family: 'Montserrat', Georgia, 'Times New Roman', Times, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

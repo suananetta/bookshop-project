@@ -6,7 +6,7 @@ import styles from '../Main.module.css';
 import Button from '../../_shared/Button/Button';
 import { selectBook, removeBook } from '../../_redux/manageSlice'
 
-function Bookcard({bookInfo}) {
+function Bookcard({bookInfo, inCart}) {
     const { format } = require('number-currency-format-2');
 
     const dispatch = useDispatch();
@@ -33,9 +33,9 @@ function Bookcard({bookInfo}) {
     }, [chosenBooks]);
 
     return (
-        <div className={styles.bookBlock}>
+        <div className={inCart? styles.bookCartBlock : styles.bookBlock}>
             <div 
-                className={styles.bookImg} 
+                className={inCart? styles.bookCartImg : styles.bookImg} 
                 style={{
                     backgroundImage: `url(${volumeInfo.imageLinks? volumeInfo.imageLinks.thumbnail : ''})`,
                     backgroundColor: !volumeInfo.imageLinks? '#5C6A79' : '',
@@ -44,7 +44,7 @@ function Bookcard({bookInfo}) {
                 {!volumeInfo.imageLinks? 'NO IMAGE AVAILABLE' : ''}
             </div>
 
-            <div className={styles.bookInfo}>
+            <div className={inCart? styles.bookCartInfo : styles.bookInfo}>
                 <span className={styles.bookAuthor}>
                     {
                         !volumeInfo.authors? 'Author not found' 
@@ -55,11 +55,11 @@ function Bookcard({bookInfo}) {
                     }
                 </span>
 
-                <span className={styles.bookTitle}>{volumeInfo.title}</span>
+                <span className={styles.bookTitle}>{inCart? volumeInfo.title.slice(0, 30) + '...' : volumeInfo.title}</span>
 
                 <div className={styles.bookRating}></div>
 
-                <p className={styles.bookDescription}>
+                <p className={styles.bookDescription} style={{display: inCart? 'none' : 'block'}}>
                     {volumeInfo.description? volumeInfo.description.slice(0, 100) + '...' : 'No description'}
                 </p>
 
@@ -75,14 +75,21 @@ function Bookcard({bookInfo}) {
                     }
                 </span>
 
-                <Button
-                    btnClass={clickedBtn? styles.btnClicked : styles.bookBtn}
-                    btnName={clickedBtn? 'in the cart' : 'BUY NOW'}
-                    disabled={saleInfo.saleability === "NOT_FOR_SALE"? true : false}
-                    onClick={(e) => {
-                        handleClick(e);
-                    }}
-                />
+               { inCart?
+                    <Button
+                        btnClass={styles.btnRemove}
+                        btnName='Remove from cart'
+                        disabled={false}
+                        onClick={() => {dispatch(removeBook(bookInfo))}}
+                    />
+                    :
+                    <Button
+                        btnClass={clickedBtn? styles.btnClicked : styles.bookBtn}
+                        btnName={clickedBtn? 'in the cart' : 'BUY NOW'}
+                        disabled={saleInfo.saleability === "NOT_FOR_SALE"? true : false}
+                        onClick={(e) => {handleClick(e)}}
+                    />
+                }
             </div>
         </div>
     )

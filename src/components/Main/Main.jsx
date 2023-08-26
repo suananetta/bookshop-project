@@ -5,21 +5,21 @@ import { Tooltip } from 'react-tooltip';
 
 import styles from './Main.module.css';
 
+import Cart from './Cart/Cart'
 import Slider from './Slider/Slider';
 import List from './List/List';
 import Bookcard from './Bookcard/Bookcard';
 
 import Button from '../_shared/Button/Button';
 import Loader from '../_shared/Loader/Loader';
-import Modal from '../_shared/Modal/Modal';
+
 import { Icon_up } from '../_assets/images/icons'
 import { getBooks } from '../_redux/manageSlice';
 
 function Main({reqInfo}) {  
     const dispatch = useDispatch();
-
     const searchInfo = useSelector((state) => state.manageBooks);
-    console.log(searchInfo);
+
     let [books, setBooks] = useState([]);
 
     useEffect(() => {setBooks(searchInfo.booksList)}, [searchInfo.booksList]);
@@ -75,7 +75,7 @@ function Main({reqInfo}) {
         <main>
             <div>
                 {
-                    searchInfo.activeModal? <Modal/> : ''
+                    searchInfo.activeModal? <Cart/> : ''
                 }
 
                 <Slider/>
@@ -102,6 +102,7 @@ function Main({reqInfo}) {
                                     <Bookcard 
                                         key={uniqid()}
                                         bookInfo={book}
+                                        inCart={false}
                                     />
                                     )
                                 })
@@ -111,26 +112,26 @@ function Main({reqInfo}) {
                                 ''
                                 :
                                 <div className={styles.booksList_btns}>
-                                <Button
-                                    btnClass={styles.bookBtn}
-                                    btnID='loadBtn'
-                                    btnName='LOAD MORE'
-                                    disabled={false}
-                                    onClick={() => {
-                                        loadMoreClick(reqInfo.maxResult);
-                                    }}
-                                />
-                                <Button
-                                    btnClass={styles.btnUP}
-                                    btnName={<Icon_up/>}
-                                    disabled={false}
-                                    tooltipID='up-tooltip' 
-                                    tooltip='Back to top'
-                                    onClick={() => {
-                                        upBtnCkick();
-                                    }}
-                                />
-                                <Tooltip id='up-tooltip'/>
+                                    <Button
+                                        btnClass={styles.bookBtn}
+                                        btnID='loadBtn'
+                                        btnName='LOAD MORE'
+                                        disabled={false}
+                                        onClick={() => {
+                                            loadMoreClick(reqInfo.maxResult);
+                                        }}
+                                    />
+                                    <Button
+                                        btnClass={styles.btnUP}
+                                        btnName={<Icon_up/>}
+                                        disabled={false}
+                                        tooltipID='up-tooltip' 
+                                        tooltip='Back to top'
+                                        onClick={() => {
+                                            upBtnCkick();
+                                        }}
+                                    />
+                                    <Tooltip id='up-tooltip'/>
                                 </div>                          
                         }
                         

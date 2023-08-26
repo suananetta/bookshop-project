@@ -69,11 +69,44 @@ li.menuItem:hover {
     line-height: 14px;
     color: #5C6A79;
 }
+.bookCartBlock {
+    width: 25%;
+    height: 384px;
+    margin: 0 30px 30px 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .bookInfo {
     width: 45%;
     display: flex;
     flex-direction: column;
+    
+}
+.bookCartInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    font-size: 14px;
+}
+.bookCartInfo .bookTitle {
+    font-size: 14px;
+    padding: 15px 0;
+}
+.btnRemove {
+    margin-top: 15px;
+    padding: 8px;
+    background-color: #fff;
+    color: #5C6A79;
+    border: 1px solid #5C6A79;
+}
+.btnRemove:hover {
+    cursor: pointer;
+    color: red;
+    border: 1px solid red;
+    transition: 0.5s;
 }
 .bookImg{
     width: 50%;
@@ -85,6 +118,11 @@ li.menuItem:hover {
     color: #FFFFFF;
     font-size: 16px;
     font-weight: 700;
+}
+.bookCartImg {
+    width: 128px;
+    height: 200px;
+    background-size: cover;
 }
 .bookTitle {
     font-family: 'Montserrat', Georgia, 'Times New Roman', Times, sans-serif;
