@@ -12,17 +12,24 @@ import Bookcard from './Bookcard/Bookcard';
 
 import Button from '../_shared/Button/Button';
 import Loader from '../_shared/Loader/Loader';
+import StarRating from '../_shared/StarRating/StarRating';
 
 import { Icon_up } from '../_assets/images/icons'
-import { getBooks } from '../_redux/manageSlice';
+import { getBooks } from '../_redux/manageBooksSlice';
+import { searchingResult } from '../_redux/manageDisplaySlice';
 
 function Main({reqInfo}) {  
     const dispatch = useDispatch();
-    const searchInfo = useSelector((state) => state.manageBooks);
+
+    const booksInfo = useSelector((state) => state.manageBooks);
+    const displayInfo = useSelector((state) => state.manageDisplay);
 
     let [books, setBooks] = useState([]);
 
-    useEffect(() => {setBooks(searchInfo.booksList)}, [searchInfo.booksList]);
+    useEffect(() => {
+        setBooks(booksInfo.booksList)
+    }, [booksInfo.booksList]);
+
     useEffect(() => {
         if(books.length > 6) {
             document.getElementById('loadBtn').scrollIntoView({ behavior: 'smooth' })
@@ -55,14 +62,12 @@ function Main({reqInfo}) {
         setCategory(e.target.textContent);
         setClicked(true);
         reqInfo.currentCategory = e.target.textContent;
-
         dispatch(getBooks(reqInfo)).then((action) => setBooks(action.payload));
     }
 
     let loadMoreClick = () => {
         reqInfo.currentCategory = category;
         reqInfo.startIndex = books.length;
-        
         dispatch(getBooks(reqInfo)).then((action) => setBooks([...books, ...action.payload]));
         // console.log(books);
     }
@@ -73,9 +78,9 @@ function Main({reqInfo}) {
     
     return (
         <main>
-            <div>
+            <div>           
                 {
-                    searchInfo.activeModal? <Cart/> : ''
+                    displayInfo.openedCart? <Cart/> : ''
                 }
 
                 <Slider/>
@@ -89,26 +94,42 @@ function Main({reqInfo}) {
                             arr={categoryList}
                             onClick={(e) => {
                                 categoryClick(e);
+                                if(displayInfo.showSearchingResult) dispatch(searchingResult());
                             }}
                         />
                     </div>
+                    
                     <div className={styles.booksList}>
                         {   
-                            books.length == 0 || searchInfo.loading? 
+                            booksInfo.loading?
                                 <Loader/>
                                 :
-                                books.map(book => {
-                                    return (
-                                    <Bookcard 
-                                        key={uniqid()}
-                                        bookInfo={book}
-                                        inCart={false}
-                                    />
-                                    )
-                                })
+                                displayInfo.showSearchingResult?
+                                    booksInfo.searchResult.map(book => {
+                                        return (
+                                        <Bookcard 
+                                            key={uniqid()}
+                                            bookInfo={book}
+                                            inCart={false}
+                                        />
+                                        )
+                                    })
+                                    :
+                                    books.length == 0 || booksInfo.loading? 
+                                        <Loader/>
+                                        :
+                                        books.map(book => {
+                                            return (
+                                            <Bookcard 
+                                                key={uniqid()}
+                                                bookInfo={book}
+                                                inCart={false}
+                                            />
+                                            )
+                                        })
                         }
                         {
-                            books.length == 0 || searchInfo.loading? 
+                            books.length == 0 || booksInfo.loading || displayInfo.showSearchingResult? 
                                 ''
                                 :
                                 <div className={styles.booksList_btns}>

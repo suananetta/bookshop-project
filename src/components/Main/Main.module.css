@@ -82,7 +82,6 @@ li.menuItem:hover {
     width: 45%;
     display: flex;
     flex-direction: column;
-    
 }
 .bookCartInfo {
     width: 100%;
@@ -130,6 +129,11 @@ li.menuItem:hover {
     font-size: 16px;
     line-height: 19px;
     color: #1C2A39;
+}
+.bookRating {
+    display: flex;
+    align-items: flex-end;
+    font-size: 12px;
 }
 .bookDescription {
     padding: 16px 0;

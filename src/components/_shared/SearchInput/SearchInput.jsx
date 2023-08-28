@@ -9,10 +9,10 @@ function SearchInput({onChange, onClick}) {
                 className={styles.inputPlace}
                 type='text'
                 name='seachBook' 
-                placeholder='Enter here'
+                placeholder='Enter title or author'
                 onChange={onChange} 
             />
-            <button className={styles.inputBtn}><Icon_search/></button>
+            <button className={styles.inputBtn} onClick={onClick}><Icon_search/></button>
         </div>
     )
 }

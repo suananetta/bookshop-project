@@ -4,19 +4,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from '../Main.module.css';
 
 import Button from '../../_shared/Button/Button';
-import { selectBook, removeBook } from '../../_redux/manageSlice'
+import StarRating from '../../_shared/StarRating/StarRating';
+import { selectBook, removeBook } from '../../_redux/manageBooksSlice';
 
 function Bookcard({bookInfo, inCart}) {
+    const dispatch = useDispatch();
     const { format } = require('number-currency-format-2');
 
-    const dispatch = useDispatch();
-
     const chosenBooks = useSelector((state) => state.manageBooks.chosenBooks);
+    const currentUSD = useSelector((state) => state.manageDisplay.currentUSD);
 
     let volumeInfo = bookInfo.volumeInfo;
     let saleInfo = bookInfo.saleInfo;
-
-    let [clickedBtn, setClickedBtn] = useState(false)
+    console.log(typeof(volumeInfo.averageRating));
+    let [clickedBtn, setClickedBtn] = useState(false);
 
     let handleClick = (e) => {
         if(e.target.innerText === 'BUY NOW') {
@@ -57,7 +58,17 @@ function Bookcard({bookInfo, inCart}) {
 
                 <span className={styles.bookTitle}>{inCart? volumeInfo.title.slice(0, 30) + '...' : volumeInfo.title}</span>
 
-                <div className={styles.bookRating}></div>
+                {   
+                    inCart? 
+                        ''
+                        :
+                        <div className={styles.bookRating}>
+                            <StarRating 
+                                rating={typeof(volumeInfo.averageRating) === 'number'? volumeInfo.averageRating : 0}
+                            />
+                            <span className={styles.bookReview}>{volumeInfo.ratingsCount? volumeInfo.ratingsCount : 0} review</span>
+                        </div>
+                }
 
                 <p className={styles.bookDescription} style={{display: inCart? 'none' : 'block'}}>
                     {volumeInfo.description? volumeInfo.description.slice(0, 100) + '...' : 'No description'}
@@ -69,26 +80,27 @@ function Bookcard({bookInfo, inCart}) {
                         : 
                         saleInfo.saleability === "FREE"? "FREE"
                         :
-                        format(saleInfo.retailPrice.amount, {
-                            currency: `${saleInfo.retailPrice.currencyCode}`
+                        format(saleInfo.retailPrice.amount/currentUSD, {
+                            currency: `USD`
                         })
                     }
                 </span>
 
-               { inCart?
-                    <Button
-                        btnClass={styles.btnRemove}
-                        btnName='Remove from cart'
-                        disabled={false}
-                        onClick={() => {dispatch(removeBook(bookInfo))}}
-                    />
-                    :
-                    <Button
-                        btnClass={clickedBtn? styles.btnClicked : styles.bookBtn}
-                        btnName={clickedBtn? 'in the cart' : 'BUY NOW'}
-                        disabled={saleInfo.saleability === "NOT_FOR_SALE"? true : false}
-                        onClick={(e) => {handleClick(e)}}
-                    />
+               { 
+                    inCart?
+                        <Button
+                            btnClass={styles.btnRemove}
+                            btnName='Remove from cart'
+                            disabled={false}
+                            onClick={() => {dispatch(removeBook(bookInfo))}}
+                        />
+                        :
+                        <Button
+                            btnClass={clickedBtn? styles.btnClicked : styles.bookBtn}
+                            btnName={clickedBtn? 'in the cart' : 'BUY NOW'}
+                            disabled={saleInfo.saleability === "NOT_FOR_SALE"? true : false}
+                            onClick={(e) => {handleClick(e)}}
+                        />
                 }
             </div>
         </div>
@@ -97,16 +109,4 @@ function Bookcard({bookInfo, inCart}) {
 
 export default Bookcard;
 
-/*
-    .volumeInfo
-
-    bookCover : .volumeInfo.imageLinks.thumbnail
-    bookAuthor: .volumeInfo.authors - array
-    bookName: .volumeInfo.title
-    bookReviews:  .volumeInfo.averageRating - если "FOR_SALE"
-    bookDescription: .volumeInfo.description 100 символов
-    bookPrice: .saleInfo.saleability - "NOT_FOR_SALE" / "FOR_SALE"
-
-    "FOR_SALE": .saleInfo.retailPrice.amount .saleInfo.retailPrice.currencyCode
-    price
- */
+// averageRating

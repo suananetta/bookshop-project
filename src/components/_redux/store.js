@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import manageSlice from './manageSlice';
+import manageBooksSlice from './manageBooksSlice';
+import manageDisplaySlice from './manageDisplaySlice';
 
 export default configureStore({
   reducer: {
-    manageBooks: manageSlice,
+    manageBooks: manageBooksSlice,
+    manageDisplay: manageDisplaySlice
   },
 });

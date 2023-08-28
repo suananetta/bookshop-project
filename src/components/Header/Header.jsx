@@ -3,19 +3,29 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './Header.module.css';
 
-import Button from '../_shared/Button/Button';
-import Input from '../_shared/SearchInput/SearchInput';
 import {Icon_profile, Icon_search, Icon_cart} from '../_assets/images/icons';
-import { activeModal } from '../_redux/manageSlice';
+import Button from '../_shared/Button/Button';
+import SearchInput from '../_shared/SearchInput/SearchInput';
+import { getBookVolume } from '../_redux/manageBooksSlice';
+import { openCart, searchingResult } from '../_redux/manageDisplaySlice';
 
 function Header() {
     const dispatch = useDispatch();
     const chosenBooks = useSelector((state) => state.manageBooks.chosenBooks);
 
     let [showSearch, setShowSearch] = useState(false);
+    let [searchData, setSearchData] = useState('');
 
     let handleClick = () => {
         setShowSearch(!showSearch);
+    }
+
+    let handleChange = (e) => {
+        setSearchData(e.target.value);
+    }
+
+    let searchRequest = (data) => {
+        dispatch(getBookVolume(data));
     }
 
     return (
@@ -32,21 +42,22 @@ function Header() {
                 </nav>
                 {
                     showSearch?
-                    <Input
-                        onChange={() => {}} 
-                        onClick={() => {}}
-                    />
-                    :
-                    ''
+                        <SearchInput
+                            onChange={(e) => {handleChange(e)}} 
+                            onClick={() => {
+                                searchRequest(searchData);
+                                dispatch(searchingResult(true));
+                            }}
+                        />
+                        :
+                        ''
                 }
                 <div className={styles.management}>
                         <Button
                             btnClass={styles.manageItem}
                             btnName={<Icon_profile/>}
                             disabled={false}
-                            onClick={(e) => {
-                                console.log(e);
-                            }}
+                            onClick={(e) => {}}
                         />
                         <Button
                             btnClass={styles.manageItem}
@@ -62,12 +73,12 @@ function Header() {
                                 btnName={<Icon_cart/>}
                                 disabled={false}
                                 onClick={() => {
-                                    dispatch(activeModal());
+                                    dispatch(openCart());
                                 }}
                             />
                             {
                                 chosenBooks.length > 0?
-                                    <div className={styles.cartBadge} onClick={() => dispatch(activeModal())}>{chosenBooks.length}</div>
+                                    <div className={styles.cartBadge} onClick={() => dispatch(openCart())}>{chosenBooks.length}</div>
                                     :
                                     ''
                             }

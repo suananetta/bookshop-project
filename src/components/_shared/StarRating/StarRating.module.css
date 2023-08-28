@@ -1,0 +1,11 @@
+.ratingBody {
+    font-size: 18px;
+    line-height: 1;
+}
+.ratingBody::before {
+    content: "★★★★★";
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, #F2C94C var(--rating), #EEEDF5 var(--rating));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+}

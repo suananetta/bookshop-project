@@ -27,8 +27,6 @@ function Slider() {
     let [bannerStyle, setBannerStyle] = useState('banner1');
 
     let handleClick = (e) => {
-        console.log(e.target.id);
-
         let newSlides = [];
 
         slides.map(image => {
