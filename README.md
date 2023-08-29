@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+<h1>Книжный магазин</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Книжный магазин на основе <a href='https://developers.google.com/books/docs/v1/using?hl=ru'>Google Books APIs</a>
 
-## Available Scripts
+<h4><a href="https://suananetta.github.io/bookshop-project/">Ознакомиться</a></h4>
 
-In the project directory, you can run:
+<h2>Используемый стек:</h2>
+<ul>
+<li>HTML5,</li>
+<li>CSS3 (adaptive, modules),</li>
+<li>JS,</li>
+<li>React,</li>
+<li>Redux Toolkit (thunk),</li>
+<li>Rest API (axios),</li>
+</ul>
 
-### `npm start`
+<h3>Функционал:</h3>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<h4>Шапка:</h4>
+<ul>Содержит:
+  <li>логотип,</li>
+  <li>навигацию,</li>
+  <li>панель управления.</li>
+</ul>
+<ul>Навигация по страницам в данном проекте не предусмотрена, ссылки являются заглушками. Панель управления содержит кнопки:
+  <li>профиля - авторизация в данном проекте не осуществляется, заглушка,</li>
+  <li>поиска - при нажатии открывает поле поиска с кнопкой, в котором можно ввести запрос, при нажатии на кнопку осуществляется запрос к API с введенными данными, после чего результат выводится на странице,</li>
+  <li>корзины - при нажатии открывает корзину, в которой будут отображаться выбранные пользователем книги и их суммарная стоимость. Книги из корзины можно удалять нажатием на кнопку "Remove from cart",</li>
+  <li>меню - отображается только в мобильной версии и версии для планшета, открывает список категорий книг.</li>
+</ul>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<h4>Главная страница:</h4>
+<ul>Главная страница содержит:
+  <li>слайдер - слайдер картинок с кнопками управления, которые переключают изображения,</li>
+  <li>меню с категориями книг - изначально на странице подгружены книги категории "Архитектура". При нажатии на элемент списка осуществляется запрос к API и на странице отображаются книги соответствующей категории. В мобильной версии и версии для планшета меню скрыто и открывается с помощью кнопки бургер-меню в шапке,</li>
+  <li>карточки книг - отображают полученную информацию о книге: обложку, автора, название, оценки, описание и цену. Кнопка "Buy now" добавит книгу в корзину, и отобразит информацию о том, что книга уже в корзине - повторное нажатие на кнопку удалит книгу из корзины,</li>
+  <li>кнопка "Load more" - отправит дополнительный запрос в соответствующей категории и подгрузит результат к уже отображенным книгам на странице,</li>
+  <li>кнопка стрелки вверх - при нажатии проматывает страницу в начало.</li>
+</ul>
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
