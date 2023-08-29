@@ -1,6 +1,6 @@
 body {
   margin: 0 auto;
-  padding: 0 166px;
+  padding: 0 25px;
   overflow-x: hidden;
   font-family: 'Montserrat', Georgia, 'Times New Roman', Times, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -15,4 +15,10 @@ a {
   text-decoration: none;
 }
 
+
+@media (min-width: 1440px) {
+  body {
+    padding: 0; 
+  }
+}
 

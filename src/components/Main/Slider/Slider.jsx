@@ -40,12 +40,13 @@ function Slider() {
 
     return (
         <div className={styles.sliderBlock}>
-            {slides.map(image => {
-                return image.visability? 
-                    <div className={styles[bannerStyle]} key={uniqid()}></div>
-                        : 
-                    <></>;
-                })
+            {
+                slides.map(image => {
+                    return image.visability? 
+                        <div className={styles[bannerStyle]} key={uniqid()}></div>
+                            : 
+                        <></>;
+                    })
             }
             <div className={styles.dots}>
                 <Button

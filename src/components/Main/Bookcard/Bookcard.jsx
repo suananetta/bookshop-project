@@ -5,18 +5,19 @@ import styles from '../Main.module.css';
 
 import Button from '../../_shared/Button/Button';
 import StarRating from '../../_shared/StarRating/StarRating';
+
 import { selectBook, removeBook } from '../../_redux/manageBooksSlice';
 
 function Bookcard({bookInfo, inCart}) {
-    const dispatch = useDispatch();
     const { format } = require('number-currency-format-2');
+    const dispatch = useDispatch();
 
     const chosenBooks = useSelector((state) => state.manageBooks.chosenBooks);
     const currentUSD = useSelector((state) => state.manageDisplay.currentUSD);
 
     let volumeInfo = bookInfo.volumeInfo;
     let saleInfo = bookInfo.saleInfo;
-    console.log(typeof(volumeInfo.averageRating));
+
     let [clickedBtn, setClickedBtn] = useState(false);
 
     let handleClick = (e) => {
@@ -60,13 +61,13 @@ function Bookcard({bookInfo, inCart}) {
 
                 {   
                     inCart? 
-                        ''
+                        <></>
                         :
                         <div className={styles.bookRating}>
                             <StarRating 
                                 rating={typeof(volumeInfo.averageRating) === 'number'? volumeInfo.averageRating : 0}
                             />
-                            <span className={styles.bookReview}>{volumeInfo.ratingsCount? volumeInfo.ratingsCount : 0} review</span>
+                            <div className={styles.bookReview}>{volumeInfo.ratingsCount? volumeInfo.ratingsCount : 0} review</div>
                         </div>
                 }
 
@@ -108,5 +109,3 @@ function Bookcard({bookInfo, inCart}) {
 }
 
 export default Bookcard;
-
-// averageRating

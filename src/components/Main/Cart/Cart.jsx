@@ -6,11 +6,12 @@ import styles from './Cart.module.css';
 import { Icon_close } from '../../_assets/images/icons';
 import Button from '../../_shared/Button/Button';
 import Bookcard from '../Bookcard/Bookcard';
+
 import { openCart } from '../../_redux/manageDisplaySlice';
 
 function Cart() {
-    const dispatch = useDispatch();
     const { format } = require('number-currency-format-2');
+    const dispatch = useDispatch();
 
     const chosenBooks = useSelector((state) => state.manageBooks.chosenBooks);
     const currentUSD = useSelector((state) => state.manageDisplay.currentUSD);

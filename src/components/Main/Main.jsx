@@ -5,18 +5,17 @@ import { Tooltip } from 'react-tooltip';
 
 import styles from './Main.module.css';
 
-import Cart from './Cart/Cart'
+import Cart from './Cart/Cart';
 import Slider from './Slider/Slider';
 import List from './List/List';
 import Bookcard from './Bookcard/Bookcard';
 
 import Button from '../_shared/Button/Button';
 import Loader from '../_shared/Loader/Loader';
-import StarRating from '../_shared/StarRating/StarRating';
 
-import { Icon_up } from '../_assets/images/icons'
+import { Icon_up, Icon_close } from '../_assets/images/icons';
 import { getBooks } from '../_redux/manageBooksSlice';
-import { searchingResult } from '../_redux/manageDisplaySlice';
+import { mobileMenu, searchingResult } from '../_redux/manageDisplaySlice';
 
 function Main({reqInfo}) {  
     const dispatch = useDispatch();
@@ -34,7 +33,7 @@ function Main({reqInfo}) {
         if(books.length > 6) {
             document.getElementById('loadBtn').scrollIntoView({ behavior: 'smooth' })
         }
-    }, [books])
+    }, [books]);
 
     let categoryList = [
         'Architecture', 
@@ -69,24 +68,43 @@ function Main({reqInfo}) {
         reqInfo.currentCategory = category;
         reqInfo.startIndex = books.length;
         dispatch(getBooks(reqInfo)).then((action) => setBooks([...books, ...action.payload]));
-        // console.log(books);
     }
 
-    let upBtnCkick = () => {
-        document.getElementById('banner1').scrollIntoView({ behavior: 'smooth' })
+    let upBtnClick = () => {
+        if(displayInfo.device === 'mobile') {
+            document.getElementById('top').scrollIntoView({ behavior: 'smooth' })
+        } else {
+            document.getElementById('banner1').scrollIntoView({ behavior: 'smooth' })
+        }
     }
     
     return (
         <main>
             <div>           
-                {
-                    displayInfo.openedCart? <Cart/> : ''
-                }
+                {displayInfo.openedCart? <Cart/> : ''}
 
-                <Slider/>
+                {displayInfo.device == 'mobile'? <div id='top'></div> : ''}
+
+                <Slider/> 
 
                 <div className={styles.content}>
-                    <div className={styles.subjectsList}>
+                    <div 
+                        className={displayInfo.showMobileMenu? styles.subjectsListMobile : styles.subjectsList}
+                        style={{display: (displayInfo.device == 'mobile' || displayInfo.device == 'tablet') && !displayInfo.showMobileMenu? 'none' : 'flex'}}
+                    >
+                        {   
+                            displayInfo.device == 'mobile' || displayInfo.device == 'tablet'?
+                                <Button
+                                    btnClass={styles.categoryCloseBtn}
+                                    btnName={<Icon_close/>}
+                                    disabled={false}
+                                    onClick={() => {
+                                        dispatch(mobileMenu());
+                                    }}
+                                />
+                                :
+                                <></>
+                        }
                         <List 
                             ulClass={styles.menu}
                             liName={category}
@@ -95,6 +113,7 @@ function Main({reqInfo}) {
                             onClick={(e) => {
                                 categoryClick(e);
                                 if(displayInfo.showSearchingResult) dispatch(searchingResult());
+                                if(displayInfo.showMobileMenu) dispatch(mobileMenu());
                             }}
                         />
                     </div>
@@ -128,6 +147,7 @@ function Main({reqInfo}) {
                                             )
                                         })
                         }
+
                         {
                             books.length == 0 || booksInfo.loading || displayInfo.showSearchingResult? 
                                 ''
@@ -149,13 +169,12 @@ function Main({reqInfo}) {
                                         tooltipID='up-tooltip' 
                                         tooltip='Back to top'
                                         onClick={() => {
-                                            upBtnCkick();
+                                            upBtnClick();
                                         }}
                                     />
                                     <Tooltip id='up-tooltip'/>
-                                </div>                          
+                                </div>                       
                         }
-                        
                     </div>
                 </div >
             </div>

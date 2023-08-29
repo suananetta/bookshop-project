@@ -4,7 +4,8 @@ const initialState = {
     currentUSD: 100,
     openedCart: false,
     showSearchingResult: false,
-    showMobileMenu: false
+    showMobileMenu: false,
+    device: 'mobile'
 }
 
 export const manageDisplaySlice = createSlice({
@@ -12,7 +13,7 @@ export const manageDisplaySlice = createSlice({
     initialState,
     reducers: {
         getCurrentUSD(state, action) {
-            state.currentUSD = action.payload
+            action.payload? state.currentUSD = action.payload : state.currentUSD = 100;
         },
         openCart(state) {
             state.openedCart = !state.openedCart;
@@ -26,8 +27,11 @@ export const manageDisplaySlice = createSlice({
         mobileMenu(state) {
             state.showMobileMenu = !state.showMobileMenu;
         },
+        identifyDevice(state, action) {
+            state.device = action.payload;
+        }
     }
 })
 
-export const { getCurrentUSD, openCart, searchingResult, mobileMenu } = manageDisplaySlice.actions;
+export const { getCurrentUSD, openCart, searchingResult, mobileMenu, identifyDevice } = manageDisplaySlice.actions;
 export default manageDisplaySlice.reducer;

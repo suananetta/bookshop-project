@@ -1,30 +1,35 @@
 main {
-    padding: 150px 0;
+    padding: 100px 0;
 }
-
 .container {
-    width: 1440px;
+    width: 325px;
 }
-.subjectsList {
-    position: absolute;
-    width: 30%;
-    padding: 45px 0 81px;
+.content {
+    display: flex;
+    flex-direction: column;
+}
+.subjectsListMobile {
+    height: 100vh;
+    width: 100vw;
+    padding: 50px 0;
+    position: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #EFEEF6;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
 }
-.content {
-    display: flex;
-}
-.booksList {
-    z-index: 1;
-    margin-top: 46px;
-    margin-left: 406px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+.content .categoryCloseBtn {
+    background-color: transparent;
+    width: 25px;
+    padding: 5px 0;
+    margin-right: 25px;
+    align-self: flex-end;
+    border: none;
 }
 .menuItem {
     font-size: 12px;
@@ -57,31 +62,77 @@ li.menuItem:hover {
     transition: 0.3s;
 }
 
-.bookBlock {
-    width: 424px;
-    margin: 0 76px 96px 0;
+.booksList {
+    margin-top: 76px;
+    width: 100%;
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.bookBlock {
+    width: 100%;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     font-family: 'Open Sans', Georgia, 'Times New Roman', Times, sans-serif;
     font-weight: 400;
-    font-size: 10px;
-    line-height: 14px;
+    font-size: 12px;
+    line-height: 16px;
     color: #5C6A79;
 }
+.bookBlock span {
+    margin: 10px 0;
+}
+.bookInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.bookImg{
+    width: 70%;
+    height: 300px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+}
+.bookTitle {
+    font-family: 'Montserrat', Georgia, 'Times New Roman', Times, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1C2A39;
+}
+.bookRating {
+    display: flex;
+    align-items: flex-end;
+    font-size: 12px;
+}
+.bookDescription {
+    padding: 16px 0;
+}
+.bookPrice {
+    font-family: 'Montserrat', Georgia, 'Times New Roman', Times, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 16px;
+    color: #1C2A39;
+}
+
 .bookCartBlock {
-    width: 25%;
-    height: 384px;
+    width: 100%;
+    height: 344px;
     margin: 0 30px 30px 0;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-.bookInfo {
-    width: 45%;
-    display: flex;
-    flex-direction: column;
 }
 .bookCartInfo {
     width: 100%;
@@ -107,44 +158,12 @@ li.menuItem:hover {
     border: 1px solid red;
     transition: 0.5s;
 }
-.bookImg{
-    width: 50%;
-    height: 300px;
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF;
-    font-size: 16px;
-    font-weight: 700;
-}
 .bookCartImg {
     width: 128px;
     height: 200px;
     background-size: cover;
 }
-.bookTitle {
-    font-family: 'Montserrat', Georgia, 'Times New Roman', Times, sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 19px;
-    color: #1C2A39;
-}
-.bookRating {
-    display: flex;
-    align-items: flex-end;
-    font-size: 12px;
-}
-.bookDescription {
-    padding: 16px 0;
-}
-.bookPrice {
-    font-family: 'Montserrat', Georgia, 'Times New Roman', Times, sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-    line-height: 16px;
-    color: #1C2A39;
-}
+
 
 .content button {
     margin-top: 16px;
@@ -184,7 +203,83 @@ li.menuItem:hover {
     display: flex;
     align-items: center;
 }
+.content .btnUP {
+    width: 25px;
+}
 .btnUP  {
     padding: 0px;
     border: none;
+}
+
+@media (min-width: 600px) {
+    main {
+        padding: 150px 0;
+    }
+
+    .booksList {
+        margin-top: 46px;
+    }
+    .bookBlock {
+        width: 424px;
+        margin-bottom: 96px;
+        align-items: flex-start;
+        font-size: 14px;
+        line-height: 18px;
+    }
+    .bookInfo {
+        width: 80%;
+    }
+    .bookCartBlock {
+        width: 25%;
+        height: 384px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .subjectsList {
+        position: absolute;
+        width: 45%;
+        padding: 45px 0 81px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #EFEEF6;
+    }
+    .booksList {
+        z-index: 1;
+        margin-left: 406px;
+        flex-direction: column;
+    }
+    .bookBlock {
+        margin: 0 76px 96px 0;
+        flex-direction: row;
+        font-size: 10px;
+        line-height: 14px;
+    }
+    .bookInfo {
+        width: 45%;
+    }
+    .bookImg{
+        width: 50%;
+        background-size: cover;
+    }
+    .content .btnUP {
+        width: 176px;
+    }
+}
+@media (min-width: 1440px) {
+    .subjectsList {
+        width: 35%;
+    }
+    .booksList {
+        width: 75%;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    .booksList_btns {
+        margin: 0 150px ;
+        display: flex;
+        justify-self: center;
+    }
 }

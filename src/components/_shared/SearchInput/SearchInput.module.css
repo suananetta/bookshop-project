@@ -1,5 +1,6 @@
 .inputBlock {
-
+    position: absolute;
+    top: 115px;
     display: flex;
 }
 .inputPlace {
@@ -35,4 +36,16 @@
 }
 .inputBtn:hover {
     background-color: #4c3db280;
+}
+
+@media (min-width: 600px) {
+    .inputBlock {
+        right: 73px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .inputBlock {
+        position: static;
+    }
 }

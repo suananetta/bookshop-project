@@ -4,7 +4,7 @@ const BASE_URL = 'https://www.googleapis.com/books/v1';
 
 const booksApi = axios.create({
     baseURL: BASE_URL,
-})
+});
 
 export const reqBookCategory = (category, startIndex, maxRes) => {
     return booksApi.get(`/volumes?q="subject:"${category}"&filter=ebooks&langRestrict=en&key=&printType=all&showPreorders=true&startIndex=${startIndex}&maxResults=${maxRes}`, {category, startIndex, maxRes});

@@ -3,15 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './Header.module.css';
 
-import {Icon_profile, Icon_search, Icon_cart} from '../_assets/images/icons';
+import {Icon_profile, Icon_search, Icon_cart, Icon_burger} from '../_assets/images/icons';
 import Button from '../_shared/Button/Button';
 import SearchInput from '../_shared/SearchInput/SearchInput';
+
 import { getBookVolume } from '../_redux/manageBooksSlice';
-import { openCart, searchingResult } from '../_redux/manageDisplaySlice';
+import { openCart, searchingResult, mobileMenu } from '../_redux/manageDisplaySlice';
 
 function Header() {
     const dispatch = useDispatch();
+    
     const chosenBooks = useSelector((state) => state.manageBooks.chosenBooks);
+    const displayInfo = useSelector((state) => state.manageDisplay);
 
     let [showSearch, setShowSearch] = useState(false);
     let [searchData, setSearchData] = useState('');
@@ -50,14 +53,14 @@ function Header() {
                             }}
                         />
                         :
-                        ''
+                        <></>
                 }
                 <div className={styles.management}>
                         <Button
                             btnClass={styles.manageItem}
                             btnName={<Icon_profile/>}
                             disabled={false}
-                            onClick={(e) => {}}
+                            onClick={() => {}}
                         />
                         <Button
                             btnClass={styles.manageItem}
@@ -83,6 +86,19 @@ function Header() {
                                     ''
                             }
                         </div>
+                        {displayInfo.device !== 'desktop'?
+                            <Button
+                                btnClass={styles.manageItem}
+                                btnName={<Icon_burger/>}
+                                btnID='burger-btn'
+                                disabled={false}
+                                onClick={() => {
+                                    dispatch(mobileMenu());
+                                }}
+                            />
+                            :
+                            <></>
+                        }
                 </div>          
             </div>
         </header>
